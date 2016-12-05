@@ -1,0 +1,46 @@
+<html lang="en">
+
+<head>
+  <title>Ariketa 1</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+  
+    function mostrarPeliculas() {
+      
+      var http = new XMLHttpRequest();
+      http.open("GET", "peliculas.xml", false);
+      http.send();
+      var datuak = http.responseXML;
+      
+      document.write("<table><tr><th>Titulo</th><th>Director</th></tr>");
+        var x = datuak.getElementsByTagName("Pelicula");
+        for (var i = 0 ; i < x.length ; i++)
+        {
+            document.write("<tr><td>");
+            document.write(x[i].getElementsByTagName("Titulo")[0].childNodes[0].nodeValue);
+            document.write("</td><td>");
+            document.write(x[i].getElementsByTagName("Director")[0].childNodes[0].nodeValue);
+            document.write("</td></tr>");
+        }
+    document.write("</table>");
+
+    } 
+    
+    
+    
+  </script>
+</head>
+
+<body onload="mostrarPeliculas()">
+  <h1>Peliculas</h1>
+  <div id="peliculas">
+    
+    
+  </div>
+  
+  
+</body>
+
+</html>

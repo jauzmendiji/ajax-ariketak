@@ -1,0 +1,36 @@
+<html lang="en">
+
+<head>
+  <title>Ariketa 1</title>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+  
+    function mostrarTexto() {
+      
+      var http = new XMLHttpRequest();
+      var url = document.getElementById("link").value;
+      http.open("GET", url, false);
+      http.send();
+      document.getElementById("mezua").innerHTML = http.responseText;
+    } 
+    
+    
+    
+  </script>
+</head>
+
+<body>
+
+  <input type="text" name="url" id="link"/>
+  <button onclick="mostrarTexto()">Show</button>
+  <p/>
+
+  <form>
+    <textarea id="mezua" name="mezua"></textarea>
+  </form>
+
+</body>
+
+</html>

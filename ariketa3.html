@@ -1,0 +1,95 @@
+<html lang="en">
+
+<head>
+  <title>Ariketa 3</title>
+  
+  <style type="text/css">
+    .images {
+      
+      width: 150px;
+      height: 250px;
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+        
+     function showSin() { 
+        
+        var http = new XMLHttpRequest();
+       
+        document.getElementById('reservoir').onclick = function() {
+          
+          http.open("GET", "sinopsis/reservoir.txt", false);
+          http.send();
+          var sinopsis = http.responseText;
+          
+          document.getElementById('sinopsis').innerHTML = sinopsis;
+        }
+        
+        document.getElementById('batman').onclick = function() {
+          
+          http.open("GET", "sinopsis/batman.txt", false);
+          http.send();
+          var sinopsis = http.responseText;
+          
+          document.getElementById('sinopsis').innerHTML = sinopsis;
+        }
+        
+        document.getElementById('inception').onclick = function() {
+          
+          http.open("GET", "sinopsis/inception.txt", false);
+          http.send();
+          var sinopsis = http.responseText;
+          
+          document.getElementById('sinopsis').innerHTML = sinopsis;
+        }
+        
+        document.getElementById('snach').onclick = function() {
+          
+          http.open("GET", "sinopsis/snach.txt", false);
+          http.send();
+          var sinopsis = http.responseText;
+          
+          document.getElementById('sinopsis').innerHTML = sinopsis;
+        }
+        
+        document.getElementById('trains').onclick = function() {
+          
+          http.open("GET", "sinopsis/trainspotting.txt", false);
+          http.send();
+          var sinopsis = http.responseText;
+          
+          document.getElementById('sinopsis').innerHTML = sinopsis;
+        }
+        
+        document.getElementById('gladiator').onclick = function() {
+          
+          http.open("GET", "sinopsis/gladiator.txt", false);
+          http.send();
+          var sinopsis = http.responseText;
+          
+          document.getElementById('sinopsis').innerHTML = sinopsis;
+        }
+            
+     }
+  </script>
+</head>
+
+<body>
+  <h1>Peliculas</h1>
+  <div id="peliculas">
+    <img class="images" src="/img/reservoirdogs.jpg" id="reservoir" onclick="showSin()"></img>
+    <img class="images" src="/img/trainspotting.jpg" id="trains"  onclick="showSin()"></img>
+    <img class="images" src="/img/batmanbegins.jpg"  id="batman"  onclick="showSin()"></img>
+    <img class="images" src="/img/inception.jpg"  id="inception"  onclick="showSin()"></img>
+    <img class="images" src="/img/snach.jpg" id="snach"  onclick="showSin()"></img>
+    <img class="images" src="/img/gladiator.jpg" id="gladiator"  onclick="showSin()"></img>
+  </div>
+  <div id="sinopsis"></div>
+  
+  
+</body>
+
+</html>

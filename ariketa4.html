@@ -1,0 +1,102 @@
+<html lang="en">
+
+<head>
+  <title>Ariketa 4</title>
+
+  <style type="text/css">
+    .images {
+      width: 150px;
+      height: 250px;
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+  <script type="text/javascript">
+  
+    function showSin() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          xmlIrakurri(this);
+        }
+      };
+      xhttp.open("GET", "peliculas.xml", true);
+      xhttp.send();
+    }
+
+    function xmlIrakurri(xml) {
+      xmlDoc = xml.responseXML;
+      var options = "Director: <select id='director'><option></option>";
+      var peliculas = xmlDoc.getElementsByTagName("Pelicula");
+      for (var i = 0; i < peliculas.length; i++) {
+        options += "<option value='" + peliculas[i].getElementsByTagName("Director")[0].childNodes[0].nodeValue + "'>" +
+          peliculas[i].getElementsByTagName("Director")[0].childNodes[0].nodeValue +
+          "</option>";
+      }
+      options += "</select> Pelicula: <select id='pelicula'></select>";
+      document.getElementById("selection").innerHTML = options;
+      hartuDirektorea();
+    }
+
+    function hartuDirektorea() {
+      var director = document.getElementById("director");
+      director.addEventListener("change", showPelikulak);
+    }
+
+    function showPelikulak() {
+      var opcion = "<option></option>";
+      var peliculas = xmlDoc.getElementsByTagName("Pelicula");
+      //var direc = document.getElementById("director");
+      var x = document.getElementById("director").selectedIndex;
+      var direc = document.getElementById("director").options;
+      for (var e = 0; e < peliculas.length; e++) {
+        if (direc[x].text == peliculas[e].getElementsByTagName("Director")[0].childNodes[0].nodeValue) {
+          opcion += "<option value='" + peliculas[e].getElementsByTagName("Titulo")[0].childNodes[0].nodeValue + "'>" +
+            peliculas[e].getElementsByTagName("Titulo")[0].childNodes[0].nodeValue +
+            "</option>";
+        }
+      }
+      document.getElementById("pelicula").innerHTML = opcion;
+      hartuPelikula();
+
+    }
+
+    function hartuPelikula() {
+      var pelikula = document.getElementById("pelicula");
+      pelikula.addEventListener("change", sinoShow);
+    }
+
+    function sinoShow(event) {
+      var peliculas = xmlDoc.getElementsByTagName("Pelicula");
+      var x = document.getElementById("pelicula").selectedIndex;
+      var pelic = document.getElementById("pelicula").options;
+      for (var a = 0; a < peliculas.length; a++) {
+        if (pelic[x].text == peliculas[a].getElementsByTagName("Titulo")[0].childNodes[0].nodeValue) {
+          var fitx = peliculas[a].getElementsByTagName("Sinopsis")[0].childNodes[0].nodeValue;
+          document.getElementById("sinopsis").innerHTML = fitx;
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("sinopsis").innerHTML = fitx;
+            }
+          };
+          xhttp.open("GET", fitx, true);
+          xhttp.send();
+
+        }
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Peliculas</h1>
+  <button onclick="showSin()">Sinopsis</button>
+  <div id="selection"></div>
+  <div id="sinopsis"></div>
+
+
+</body>
+
+</html>
